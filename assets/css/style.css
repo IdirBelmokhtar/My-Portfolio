@@ -1880,3 +1880,13 @@ textarea.form-input::-webkit-resizer { display: none; }
   .timeline-text { max-width: 700px; }
 
 }
+
+.download-container{
+  display: inline-block;
+}
+
+.img-wrapper {
+  width: 75%; /* Set width for the wrapper */
+  height: 75%; /* Set height for the wrapper */
+  overflow: hidden; /* Hide any overflow if needed */
+}

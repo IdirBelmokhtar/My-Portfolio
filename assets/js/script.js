@@ -135,25 +135,72 @@ for (let i = 0; i < formInputs.length; i++) {
 }
 
 
-
-// page navigation variables
+ // Variables de navigation des pages
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
+const projectItems = document.querySelectorAll('[data-index]');
+const indexPageItems = document.querySelectorAll('[data-index-page]');
 
-// add event to all nav link
-for (let i = 0; i < navigationLinks.length; i++) {
-  navigationLinks[i].addEventListener("click", function () {
+// Fonction pour activer les éléments en fonction du bouton cliqué
+function activateElements(targetPage) {
 
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
-        window.scrollTo(0, 0);
-      } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
-      }
-    }
-
+  // Désactiver tous les éléments
+  navigationLinks.forEach(link => {
+    link.classList.remove('active');
   });
+
+  pages.forEach(page => {
+    page.classList.remove('active');
+  });
+
+  projectItems.forEach(item => {
+    item.classList.add('active');
+  });
+
+  indexPageItems.forEach(item => {
+    item.classList.remove('active');
+  });
+
+  // Activer les éléments correspondant à la cible
+  navigationLinks.forEach(link => {
+    if (link.textContent.trim().toLowerCase() === targetPage) {
+      link.classList.add('active');
+    }
+  });
+
+  pages.forEach(page => {
+    if (page.dataset.page === targetPage) {
+      page.classList.add('active');
+    }
+  });
+
+  projectItems.forEach(item => {
+    if (item.dataset.index === targetPage) {
+      item.classList.add('active');
+    }
+  });
+
+  indexPageItems.forEach(item => {
+    if (item.classList.contains(targetPage)) {
+      item.classList.add('active');
+    }
+  });
+
+  window.scrollTo(0, 0); // Faire défiler la fenêtre vers le haut
 }
+
+// Ajouter un événement de clic à chaque lien de navigation
+navigationLinks.forEach(link => {
+  link.addEventListener('click', function() {
+    const targetPage = this.textContent.trim().toLowerCase(); // Obtenir le nom de la page cible
+    activateElements(targetPage);
+  });
+});
+
+// Ajouter un événement de clic à chaque élément de projet
+projectItems.forEach(item => {
+  item.addEventListener('click', function() {
+    const targetPage = this.dataset.index; // Obtenir l'index de l'élément de projet
+    activateElements(targetPage);
+  });
+});
