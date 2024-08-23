@@ -135,7 +135,7 @@ for (let i = 0; i < formInputs.length; i++) {
 }
 
 
- // Variables de navigation des pages
+// Variables de navigation des pages
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 const projectItems = document.querySelectorAll('[data-index]');
@@ -191,7 +191,7 @@ function activateElements(targetPage) {
 
 // Ajouter un événement de clic à chaque lien de navigation
 navigationLinks.forEach(link => {
-  link.addEventListener('click', function() {
+  link.addEventListener('click', function () {
     const targetPage = this.textContent.trim().toLowerCase(); // Obtenir le nom de la page cible
     activateElements(targetPage);
   });
@@ -199,8 +199,22 @@ navigationLinks.forEach(link => {
 
 // Ajouter un événement de clic à chaque élément de projet
 projectItems.forEach(item => {
-  item.addEventListener('click', function() {
+  item.addEventListener('click', function () {
     const targetPage = this.dataset.index; // Obtenir l'index de l'élément de projet
     activateElements(targetPage);
   });
+});
+
+// Initialize the history state
+window.history.pushState({ page: "current" }, "", "");
+
+// Listen for the popstate event to detect back button press
+window.addEventListener("popstate", function (event) {
+  if (event.state) {
+    // The back button was pressed
+
+    if (!navigationLinks[0].classList.contains('active')) {
+      window.location.href = "index.html"; // Redirect to index.html
+    }
+  }
 });
