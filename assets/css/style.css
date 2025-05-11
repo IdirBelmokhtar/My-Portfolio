@@ -1890,3 +1890,34 @@ textarea.form-input::-webkit-resizer { display: none; }
   height: 75%; /* Set height for the wrapper */
   overflow: hidden; /* Hide any overflow if needed */
 }
+
+.project-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 0.75em;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 2;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.project-badge.top-rated {
+  background: linear-gradient(135deg, #ffc107, #ff9800); /* gold-orange gradient */
+  color: #fff;
+}
+
+.project-badge.top-rated ion-icon {
+  font-size: 1em;
+}
+
+/* Optional hover effect for attention */
+.project-item:hover .project-badge {
+  transform: scale(1.05);
+}
