@@ -774,12 +774,15 @@
 
         <section class="projects">
 
-          <ul class="filter-list">
+          <!-- <ul class="filter-list">
 
             <li class="filter-item">
-              <button class="active" data-filter-btn>All</button>
+              <button class="active" data-filter-btn>All
+                <span data-filter-btn
+                  style="display:inline-block; background-color:#f5f5f5; color:#555; border-radius:12px; padding:2px 8px; font-size:0.75em; margin-left:6px; min-width:22px; text-align:center; font-weight:500; letter-spacing:0.2px;">25</span>
+              </button>
             </li>
-            <!-- 
+            
             <li class="filter-item">
               <button data-filter-btn>Mobile design</button>
             </li>
@@ -787,16 +790,45 @@
             <li class="filter-item">
               <button data-filter-btn>Applications</button>
             </li> 
-          -->
+         
 
             <li class="filter-item">
-              <button data-filter-btn>Mobile App</button>
+              <button data-filter-btn>Mobile App
+                <span data-filter-btn
+                  style="display:inline-block; background-color:#f5f5f5; color:#555; border-radius:12px; padding:2px 8px; font-size:0.75em; margin-left:6px; min-width:22px; text-align:center; font-weight:500; letter-spacing:0.2px;">25</span>
+              </button>
             </li>
 
             <li class="filter-item">
-              <button data-filter-btn>Web App</button>
+              <button data-filter-btn>Web App
+                <span data-filter-btn
+                  style="display:inline-block; background-color:#f5f5f5; color:#555; border-radius:12px; padding:2px 8px; font-size:0.75em; margin-left:6px; min-width:22px; text-align:center; font-weight:500; letter-spacing:0.2px;">25</span>
+              </button>
             </li>
 
+          </ul> -->
+
+          <ul class="filter-list">
+            <li class="filter-item">
+              <button class="active" data-filter-btn>
+                All
+                <span class="filter-count">(25)</span>
+              </button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>
+                Mobile App
+                <span class="filter-count">(14)</span>
+              </button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>
+                Web App
+                <span class="filter-count">(11)</span>
+              </button>
+            </li>
           </ul>
 
           <div class="filter-select-box">
@@ -814,7 +846,7 @@
             <ul class="select-list">
 
               <li class="select-item">
-                <button data-select-item>All</button>
+                <button data-select-item>All<span class="filter-count">(25)</span></button>
               </li>
               <!-- 
               <li class="select-item">
@@ -827,11 +859,11 @@
              -->
 
               <li class="select-item">
-                <button data-select-item>Mobile App</button>
+                <button data-select-item>Mobile App<span class="filter-count">(14)</span></button>
               </li>
 
               <li class="select-item">
-                <button data-select-item>Web App</button>
+                <button data-select-item>Web App<span class="filter-count">(11)</span></button>
               </li>
 
             </ul>
@@ -1032,7 +1064,7 @@
               </a>
             </li>
 
-            <li class="project-item  active" data-filter-item>
+            <li class="project-item  active" data-filter-item data-category="mobile app">
               <a href="https://play.google.com/store/apps/dev?id=4853045331043165346" target="_blank">
 
                 <figure class="project-img">

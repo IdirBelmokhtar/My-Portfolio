@@ -78,21 +78,19 @@ for (let i = 0; i < selectItems.length; i++) {
 // filter variables
 const filterItems = document.querySelectorAll("[data-filter-item]");
 
-const filterFunc = function (selectedValue) {
-
+const filterFunc = function(selectedValue) {
+  const cleanValue = selectedValue.split('(')[0].trim().toLowerCase();
+  
   for (let i = 0; i < filterItems.length; i++) {
-
-    if (selectedValue === "all") {
+    if (cleanValue === "all") {
       filterItems[i].classList.add("active");
-    } else if (selectedValue === filterItems[i].dataset.category) {
+    } else if (cleanValue === filterItems[i].dataset.category.toLowerCase()) {
       filterItems[i].classList.add("active");
     } else {
       filterItems[i].classList.remove("active");
     }
-
   }
-
-}
+};
 
 // add event in all filter button items for large screen
 let lastClickedBtn = filterBtn[0];
