@@ -42,10 +42,10 @@
 
     <ul class="filter-list">
       <li class="filter-item">
-      <button class="active" data-filter-btn>
-        <i class="fas fa-layer-group"></i>
-        All
-          <span class="filter-count">(30)</span>
+        <button class="active" data-filter-btn>
+          <i class="fas fa-layer-group"></i>
+          All
+          <span class="filter-count">30</span>
         </button>
       </li>
 
@@ -53,7 +53,7 @@
         <button data-filter-btn>
           <i class="fas fa-fire"></i>
           Popular
-          <span class="filter-count">(8)</span>
+          <span class="filter-count">8</span>
         </button>
       </li>
 
@@ -61,7 +61,7 @@
         <button data-filter-btn>
           <i class="fas fa-mobile-alt"></i>
           Mobile
-          <span class="filter-count">(16)</span>
+          <span class="filter-count">16</span>
         </button>
       </li>
 
@@ -69,7 +69,7 @@
         <button data-filter-btn>
           <i class="fas fa-globe"></i>
           Web
-          <span class="filter-count">(14)</span>
+          <span class="filter-count">14</span>
         </button>
       </li>
     </ul>
@@ -88,9 +88,6 @@
 
       <ul class="select-list">
 
-        <li class="select-item">
-          <button data-select-item>All<span class="filter-count">(30)</span></button>
-        </li>
         <!-- 
               <li class="select-item">
                 <button data-select-item>Mobile design</button>
@@ -101,14 +98,37 @@
               </li>
              -->
 
-        <li class="select-item">
-          <button data-select-item>Mobile<span class="filter-count">(16)</span></button>
-        </li>
 
         <li class="select-item">
-          <button data-select-item>Web<span class="filter-count">(14)</span></button>
-        </li>
+        <button data-select-item style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;border:none;background:transparent;width:100%;text-align:left;">
+        <i class="fas fa-layer-group" aria-hidden="true" style="color:#bbb;margin-right:8px;"></i>
+        All<span class="select-count" style="margin-left:auto;display:inline-block;background:#bbb;color:#555;border-radius:12px;padding:2px 8px;font-size:0.75em;min-width:30px;text-align:center;font-weight:500;">30</span>
+        </button>
+      </li>
 
+      <li class="select-item">
+        <button data-select-item style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;border:none;background:transparent;width:100%;text-align:left;">
+        <i class="fas fa-fire" aria-hidden="true" style="margin-right:8px;color:#bbb;"></i>
+        Popular
+        <span class="select-count" style="margin-left:auto;display:inline-block;background:#bbb;color:#555;border-radius:12px;padding:2px 8px;font-size:0.75em;min-width:30px;text-align:center;font-weight:600;">8</span>
+        </button>
+      </li>
+
+      <li class="select-item">
+        <button data-select-item style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;border:none;background:transparent;width:100%;text-align:left;">
+        <i class="fas fa-mobile-alt" aria-hidden="true" style="margin-right:8px;color:#bbb;"></i>
+        Mobile
+        <span class="select-count" style="margin-left:auto;display:inline-block;background:#bbb;color:#555;border-radius:12px;padding:2px 8px;font-size:0.75em;min-width:30px;text-align:center;font-weight:500;">16</span>
+        </button>
+      </li>
+
+      <li class="select-item">
+        <button data-select-item style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;border:none;background:transparent;width:100%;text-align:left;">
+        <i class="fas fa-globe" aria-hidden="true" style="margin-right:8px;color:#bbb;"></i>
+        Web
+        <span class="select-count" style="margin-left:auto;display:inline-block;background:#bbb;color:#555;border-radius:12px;padding:2px 8px;font-size:0.75em;min-width:30px;text-align:center;font-weight:500;">14</span>
+        </button>
+      </li>
       </ul>
 
     </div>

@@ -1148,14 +1148,14 @@ main {
   color: #bbb;
   padding: 2px 6px;
   border-radius: 6px;
-  margin-left: 6px;
+  margin-left: 2px;
   transition: all 0.3s ease;
 }
 
 
 .filter-item button:hover .filter-count {
   background: rgba(255, 204, 0, 0.15);
-  color: #ffcc00;
+  color: hsl(45, 54%, 58%);
 }
 
 
@@ -1172,8 +1172,8 @@ main {
   background: #1e1e1e;
   border: 1.5px solid #2a2a2a;
   color: #e5e5e5;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 512;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1184,10 +1184,10 @@ main {
 }
 
 .filter-item button:hover {
-  border-color: #ffcc00;
+  border-color: hsl(45, 54%, 58%);
   background: rgba(255, 204, 0, 0.1);
   transform: translateY(-2px);
-  color: #ffcc00;
+  color: hsl(45, 54%, 58%);
 }
 
 .filter-item button:hover i {
@@ -1196,7 +1196,7 @@ main {
 }
 
 .filter-item button.active {
-  background: linear-gradient(135deg, #ffcc00 0%, #b38b00 100%);
+  background: linear-gradient(135deg, hsl(45, 54%, 58%) 0%, hsl(45, 47%, 65%) 100%);
   color: #1a1a1a;
   border: none;
   box-shadow: 0 2px 6px rgba(255, 204, 0, 0.25);

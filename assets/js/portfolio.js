@@ -29,8 +29,7 @@ for (let i = 0; i < selectItems.length; i++) {
 const filterItems = document.querySelectorAll("[data-filter-item]");
 
 const filterFunc = function(selectedValue) {
-  const cleanValue = selectedValue.split('(')[0].trim().toLowerCase();
-  
+  const cleanValue = String(selectedValue).trim().split(/\s+/)[0].toLowerCase();
   for (let i = 0; i < filterItems.length; i++) {
     if (cleanValue === "all") {
       filterItems[i].classList.add("active");
