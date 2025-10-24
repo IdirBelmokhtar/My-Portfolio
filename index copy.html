@@ -807,29 +807,218 @@
             </li>
 
           </ul> -->
-
-          <ul class="filter-list">
+ <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .filter-list {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .filter-item {
+            flex: 1;
+            min-width: 150px;
+            max-width: 200px;
+        }
+        
+        .filter-item button {
+            width: 100%;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 12px;
+            background-color: #f8f9fa;
+            color: #495057;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .filter-item button:hover {
+            background-color: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .filter-item button.active {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            box-shadow: 0 6px 15px rgba(37, 117, 252, 0.4);
+        }
+        
+        .filter-count {
+            font-size: 14px;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-img {
+            height: 160px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .project-info {
+            padding: 20px;
+        }
+        
+        .project-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .project-category {
+            display: inline-block;
+            padding: 4px 10px;
+            background-color: #e9ecef;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #495057;
+        }
+        
+        @media (max-width: 768px) {
+            .filter-list {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filter-item {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+         <div class="container">
+        <h1>Project Portfolio</h1>
+        
+        <ul class="filter-list">
             <li class="filter-item">
-              <button class="active" data-filter-btn>
-                All
-                <span class="filter-count">(30)</span>
-              </button>
+                <div id="all-catigory">
+                    <button class="active" data-filter-btn>
+                        All
+                        <span class="filter-count">(30)</span>
+                    </button>
+                </div>
             </li>
 
             <li class="filter-item">
-              <button data-filter-btn>
-                Mobile App
-                <span class="filter-count">(16)</span>
-              </button>
+                <button data-filter-btn>
+                    Popular
+                    <span class="filter-count">(8)</span>
+                </button>
             </li>
 
             <li class="filter-item">
-              <button data-filter-btn>
-                Web App
-                <span class="filter-count">(14)</span>
-              </button>
+                <button data-filter-btn>
+                    Mobile
+                    <span class="filter-count">(16)</span>
+                </button>
             </li>
-          </ul>
+
+            <li class="filter-item">
+                <button data-filter-btn>
+                    Web
+                    <span class="filter-count">(14)</span>
+                </button>
+            </li>
+        </ul>
+        
+        <div class="projects-grid">
+            <div class="project-card" data-category="web">
+                <div class="project-img">E-Commerce Site</div>
+                <div class="project-info">
+                    <div class="project-title">Online Store</div>
+                    <span class="project-category">Web</span>
+                </div>
+            </div>
+            
+            <div class="project-card" data-category="mobile">
+                <div class="project-img">Fitness App</div>
+                <div class="project-info">
+                    <div class="project-title">Health Tracker</div>
+                    <span class="project-category">Mobile</span>
+                </div>
+            </div>
+            
+            <div class="project-card" data-category="web">
+                <div class="project-img">Portfolio Website</div>
+                <div class="project-info">
+                    <div class="project-title">Designer Portfolio</div>
+                    <span class="project-category">Web</span>
+                </div>
+            </div>
+            
+            <div class="project-card" data-category="mobile">
+                <div class="project-img">Travel App</div>
+                <div class="project-info">
+                    <div class="project-title">Trip Planner</div>
+                    <span class="project-category">Mobile</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
           <div class="filter-select-box">
 
@@ -876,7 +1065,7 @@
               data-index="project-1" style="position: relative;">
               <a>
                 <span class="project-badge top-rated">
-                  <ion-icon name="star"></ion-icon> Top Rated
+                  <ion-icon name="flame"></ion-icon> Popular
                 </span>
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -989,7 +1178,7 @@
               <a>
 
                 <span class="project-badge top-rated">
-                  <ion-icon name="star"></ion-icon> Top Rated
+                  <ion-icon name="flame"></ion-icon> Popular
                 </span>
 
                 <figure class="project-img">

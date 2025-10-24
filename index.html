@@ -24,6 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <!-- Google Tag Manager -->
   <script>(function (w, d, s, l, i) {
@@ -128,7 +129,7 @@
             .then(data => {
               const section = document.getElementById(`${page}-content`);
               section.innerHTML = data;
-              if (page !== "about") section.style.display = "none";
+              if (page !== "portfolio") section.style.display = "none";
               if (page === "portfolio") initPortfolio();
             });
         });
