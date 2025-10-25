@@ -2217,6 +2217,7 @@ textarea.form-input::-webkit-resizer {
 
 .download-container {
   display: inline-block;
+  margin-right: 10px;
 }
 
 .img-wrapper {
