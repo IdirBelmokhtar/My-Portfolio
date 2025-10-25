@@ -95,7 +95,7 @@
       <!--
         - #PORTFOLIO
       -->
-      <div id="portfolio-content"></div>
+      <div id="projects-content"></div>
 
       <!--
         - #BLOG
@@ -110,7 +110,7 @@
 
       <script>
         // List of sections to load
-        const pages = ["about", "resume", "portfolio", "blog", "contact"];
+        const pages = ["about", "resume", "projects", "blog", "contact"];
 
         // Load navbar first
         fetch("partials/navbar.html")
@@ -130,7 +130,7 @@
               const section = document.getElementById(`${page}-content`);
               section.innerHTML = data;
               if (page !== "about") section.style.display = "none";
-              if (page === "portfolio") initPortfolio();
+              if (page === "projects") initPortfolio();
             });
         });
 
