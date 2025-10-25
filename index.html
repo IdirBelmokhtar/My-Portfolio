@@ -129,7 +129,7 @@
             .then(data => {
               const section = document.getElementById(`${page}-content`);
               section.innerHTML = data;
-              if (page !== "portfolio") section.style.display = "none";
+              if (page !== "about") section.style.display = "none";
               if (page === "portfolio") initPortfolio();
             });
         });
