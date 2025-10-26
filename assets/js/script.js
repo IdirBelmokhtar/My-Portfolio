@@ -167,3 +167,18 @@ window.addEventListener("popstate", function (event) {
     }
   }
 });
+
+(function () {
+  const imgs = document.querySelectorAll('.project-img .img-wrap img');
+  imgs.forEach(img => {
+    const wrap = img.closest('.img-wrap');
+    function markLoaded() { wrap.classList.add('loaded'); }
+    if (img.complete && img.naturalWidth) {
+      // already cached / loaded
+      markLoaded();
+    } else {
+      img.addEventListener('load', markLoaded);
+      img.addEventListener('error', markLoaded); // hide spinner on error too
+    }
+  });
+})();
