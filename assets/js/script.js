@@ -149,24 +149,24 @@ window.mobileCheck = function () {
   return check;
 };
 
-// Initialize the history state
-window.history.pushState({ page: "current" }, "", "");
+// // Initialize the history state
+// window.history.pushState({ page: "current" }, "", "");
 
-// Listen for the popstate event to detect back button press
-window.addEventListener("popstate", function (event) {
-  if (event.state) {
-    // The back button was pressed
+// // Listen for the popstate event to detect back button press
+// window.addEventListener("popstate", function (event) {
+//   if (event.state) {
+//     // The back button was pressed
 
-    if (!navigationLinks[0].classList.contains('active')) {
-      // Check if the user is on a mobile device
-      if (window.mobileCheck()) {
-        window.location.href = "index.html"; // Redirect to index.html on mobile
-      } else {
-        window.location.href = "index.html";
-      }
-    }
-  }
-});
+//     if (!navigationLinks[0].classList.contains('active')) {
+//       // Check if the user is on a mobile device
+//       if (window.mobileCheck()) {
+//         window.location.href = "index.html"; // Redirect to index.html on mobile
+//       } else {
+//         window.location.href = "index.html";
+//       }
+//     }
+//   }
+// });
 
 (function () {
   const imgs = document.querySelectorAll('.project-img .img-wrap img');
