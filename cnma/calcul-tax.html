@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculateur de Taxe - Algérie Poste</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    /* Variables CSS pour une cohérence */
+    :root {
+        --primary: #10b981;
+        --primary-light: #34d399;
+        --primary-dark: #059669;
+        --secondary: #047857;
+        --secondary-light: #065f46;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --darker: #121212;
+        --success: #10b981;
+        --warning: #f72585;
+        --gray: #6c757d;
+        --gray-light: #adb5bd;
+        --border-radius: 16px;
+        --border-radius-sm: 8px;
+        --box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        --box-shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        --gradient-light: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
+    }
+
+    /* Reset et styles de base */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+        color: var(--dark);
+        line-height: 1.6;
+    }
+
+    .container {
+        background: white;
+        padding: 40px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow-lg);
+        max-width: 500px;
+        width: 100%;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+    }
+
+    .container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        background: var(--gradient);
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 35px;
+        position: relative;
+    }
+
+    .logo {
+        width: 70px;
+        height: 70px;
+        background: var(--gradient);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+        box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+    }
+
+    .logo img {
+        width: 54px;
+        height: 54px;
+        filter: brightness(0) invert(1);
+    }
+
+    h2 {
+        color: var(--dark);
+        margin-bottom: 8px;
+        font-size: 1.9rem;
+        font-weight: 800;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .subtitle {
+        color: var(--gray);
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .input-group {
+        margin-bottom: 30px;
+        position: relative;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--dark);
+        font-weight: 600;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .input-wrapper {
+        position: relative;
+    }
+
+    input {
+        width: 100%;
+        padding: 18px 20px 18px 50px;
+        border-radius: var(--border-radius-sm);
+        border: 2px solid #e9ecef;
+        font-size: 16px;
+        transition: var(--transition);
+        background-color: #f8f9fa;
+        font-weight: 500;
+    }
+
+    input:focus {
+        border-color: var(--primary);
+        outline: none;
+        background-color: white;
+        box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
+        transform: translateY(-2px);
+    }
+
+    .input-icon {
+        position: absolute;
+        left: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--gray);
+        font-size: 1.2rem;
+        transition: var(--transition);
+    }
+
+    input:focus + .input-icon {
+        color: var(--primary);
+    }
+
+    button {
+        width: 100%;
+        padding: 18px;
+        border-radius: var(--border-radius-sm);
+        border: none;
+        background: var(--gradient);
+        color: white;
+        font-size: 1.05rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+        position: relative;
+        overflow: hidden;
+    }
+
+    button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: 0.5s;
+    }
+
+    button:hover {
+        background: var(--gradient-light);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(16, 185, 129, 0.45);
+    }
+
+    button:hover::before {
+        left: 100%;
+    }
+
+    button:active {
+        transform: translateY(0);
+    }
+
+    /* Styles pour le popup */
+    .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition);
+        padding: 20px;
+    }
+
+    .popup-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .popup {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow-lg);
+        max-width: 500px;
+        width: 100%;
+        padding: 30px;
+        position: relative;
+        transform: translateY(20px);
+        transition: var(--transition);
+    }
+
+    .popup-overlay.active .popup {
+        transform: translateY(0);
+    }
+
+    .popup-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .popup-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--dark);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--gray);
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+    }
+
+    .close-btn:hover {
+        background: #f1f5f9;
+        color: var(--dark);
+    }
+
+    .result-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+    }
+
+    .result-item:hover {
+        transform: translateX(5px);
+    }
+
+    .result-item:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .result-label {
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .result-value {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 1.05rem;
+    }
+
+    .final-result {
+        background: var(--gradient);
+        color: white;
+        margin-top: 20px;
+        border-radius: var(--border-radius-sm);
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+    }
+
+    .final-label {
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    .final-value {
+        font-weight: 800;
+        font-size: 1.4rem;
+    }
+
+    .footer {
+        margin-top: 30px;
+        text-align: center;
+        color: var(--gray);
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    /* Animation pour le bouton */
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+
+    .pulse {
+        animation: pulse 1.5s infinite;
+    }
+
+    /* Animation de particules */
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    .floating {
+        animation: float 3s ease-in-out infinite;
+    }
+
+    /* Responsive */
+    @media (max-width: 576px) {
+        .container {
+            padding: 30px 25px;
+        }
+        
+        h2 {
+            font-size: 1.6rem;
+        }
+        
+        input, button {
+            padding: 16px;
+        }
+        
+        .logo {
+            width: 70px;
+            height: 70px;
+        }
+        
+        .logo img {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .popup {
+            padding: 25px 20px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div class="logo floating">
+            <img src="crma-logo.png">
+        </div>
+        <h2>Calculateur de Taxe</h2>
+        <p class="subtitle">Algérie Poste</p>
+    </div>
+
+    <div class="input-group">
+        <label for="montant">
+            <i class="fas fa-money-bill-wave"></i>
+            Montant en DA
+        </label>
+        <div class="input-wrapper">
+            <input type="text" id="montant" placeholder="Ex: 275380,75" autocomplete="off">
+            <div class="input-icon">
+                <i class="fas fa-dinar-sign"></i>
+            </div>
+        </div>
+    </div>
+
+    <button onclick="calc()">
+        <span>Calculer la taxe</span>
+        <i class="fas fa-arrow-right"></i>
+    </button>
+    
+    <!-- <div class="footer">
+        <i class="fas fa-info-circle"></i>
+        <span>Calcul basé sur la réglementation en vigueur</span>
+    </div> -->
+</div>
+
+<!-- Popup pour afficher les résultats -->
+<div class="popup-overlay" id="popupOverlay">
+    <div class="popup">
+        <div class="popup-header">
+            <div class="popup-title">
+                <i class="fas fa-chart-line"></i>
+                Résultats du calcul
+            </div>
+            <button class="close-btn" onclick="closePopup()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="popupContent">
+            <!-- Le contenu du popup sera inséré ici -->
+        </div>
+    </div>
+</div>
+
+<script>
+function parseFloatComma(value) {
+    return parseFloat(value.replace(",", "."));
+}
+
+function formatFloat(value) {
+    return value.toFixed(2).replace(".", ",");
+}
+
+function calc() {
+    let montantInput = document.getElementById("montant").value.trim();
+    
+    // Vérification de l'entrée
+    if (!montantInput) {
+        showError("Veuillez saisir un montant.");
+        return;
+    }
+    
+    // Validation du format numérique
+    if (!/^[0-9]+([,\.][0-9]{1,2})?$/.test(montantInput)) {
+        showError("Format invalide. Utilisez un nombre avec jusqu'à 2 décimales.");
+        return;
+    }
+    
+    let montant = parseFloatComma(montantInput);
+
+    if (isNaN(montant) || montant <= 0) {
+        showError("Veuillez saisir un montant valide supérieur à zéro.");
+        return;
+    }
+
+    // Animation du bouton
+    const button = document.querySelector('button');
+    button.classList.add('pulse');
+    setTimeout(() => button.classList.remove('pulse'), 1500);
+
+    // 1. Arrondir au palier supérieur de 5000
+    let price = Math.ceil(montant / 5000) * 5000;
+
+    // Fonction calcul taxe (float)
+    function calculTaxe(p) {
+        return (p / 5000) * 12 + 18;
+    }
+
+    let taxe = calculTaxe(price);
+
+    // EXTRAIRE LES CHIFFRES
+    let montantInt = Math.floor(montant); // supprimer décimales
+    let troisDerniers = montantInt % 1000; // 3 derniers chiffres
+    let quatreChiffre = Math.floor((montantInt % 10000) / 1000); // 4e chiffre
+
+    // CONDITION MODIFIÉE : 4e chiffre = 0 ou 5
+    if (taxe > troisDerniers && (quatreChiffre === 0 || quatreChiffre === 5)) {
+        price -= 5000;
+        taxe = calculTaxe(price);
+    }
+
+    let finaleprice = montant - taxe;
+
+    // Affichage résultat dans le popup
+    document.getElementById("popupContent").innerHTML = `
+        <div class="result-item">
+            <span class="result-label">
+                <i class="fas fa-file-invoice-dollar"></i>
+                Montant initial
+            </span>
+            <span class="result-value">${formatFloat(montant)} DA</span>
+        </div>
+        <div class="result-item">
+            <span class="result-label">
+                <i class="fas fa-arrows-alt-h"></i>
+                Montant arrondi
+            </span>
+            <span class="result-value">${formatFloat(price)} DA</span>
+        </div>
+        <div class="result-item">
+            <span class="result-label">
+                <i class="fas fa-percentage"></i>
+                Taxe calculée
+            </span>
+            <span class="result-value">${formatFloat(taxe)} DA</span>
+        </div>
+        <div class="final-result">
+            <span class="final-label">
+                <i class="fas fa-hand-holding-usd"></i>
+                Montant moin taxe
+            </span>
+            <span class="final-value">${formatFloat(finaleprice)} DA</span>
+        </div>
+    `;
+    
+    // Afficher le popup
+    openPopup();
+}
+
+function showError(message) {
+    document.getElementById("popupContent").innerHTML = `
+        <div style="color: var(--warning); text-align: center; font-weight: 500; padding: 20px;">
+            <i class="fas fa-exclamation-circle" style="font-size: 2rem; margin-bottom: 10px;"></i>
+            <div>${message}</div>
+        </div>
+    `;
+    openPopup();
+}
+
+function openPopup() {
+    document.getElementById("popupOverlay").classList.add("active");
+}
+
+function closePopup() {
+    document.getElementById("popupOverlay").classList.remove("active");
+}
+
+// Fermer le popup en cliquant en dehors
+document.getElementById("popupOverlay").addEventListener("click", function(e) {
+    if (e.target === this) {
+        closePopup();
+    }
+});
+
+// Permettre l'utilisation de la touche Entrée
+document.getElementById("montant").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        calc();
+    }
+});
+
+// Effet de focus amélioré
+document.getElementById("montant").addEventListener("focus", function() {
+    this.parentElement.style.transform = "translateY(-2px)";
+});
+
+document.getElementById("montant").addEventListener("blur", function() {
+    this.parentElement.style.transform = "translateY(0)";
+});
+</script>
+
+</body>
+</html>
