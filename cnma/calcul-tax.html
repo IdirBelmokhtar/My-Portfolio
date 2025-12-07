@@ -407,9 +407,9 @@
 
 <div class="container">
     <div class="header">
-        <div class="logo floating">
+        <!-- <div class="logo floating">
             <img src="crma-logo.png">
-        </div>
+        </div> -->
         <h2>Calculateur de Taxe</h2>
         <p class="subtitle">Algérie Poste</p>
     </div>
@@ -545,11 +545,78 @@ function calc() {
             </span>
             <span class="final-value">${formatFloat(finaleprice)} DA</span>
         </div>
+         <div class="final-result">
+            <span class="final-value">${numberToWords(finaleprice)} dinar algérien</span>
+        </div>
     `;
     
     // Afficher le popup
     openPopup();
 }
+
+function numberToWords(num) {
+    const ones = ['', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf'];
+    const teens = ['dix', 'onze', 'douze', 'treize', 'quatorze', 'quinze', 'seize', 
+                   'dix-sept', 'dix-huit', 'dix-neuf'];
+
+    const tens = ['', '', 'vingt', 'trente', 'quarante', 'cinquante', 
+                  'soixante', 'soixante', 'quatre-vingt', 'quatre-vingt'];
+
+    const scale = ['', 'mille', 'million', 'milliard'];
+
+    if (num === 0) return 'zéro';
+
+    let result = '';
+    let scaleIndex = 0;
+
+    while (num > 0) {
+        let chunk = num % 1000;
+
+        if (chunk > 0) {
+            let chunkWords = '';
+
+            // ---- Centaines ----
+            let h = Math.floor(chunk / 100);
+            if (h > 0) {
+                chunkWords += (h === 1 ? 'cent' : ones[h] + ' cents') + ' ';
+            }
+
+            // ---- Dizaines + unités ----
+            let remainder = chunk % 100;
+            let t = Math.floor(remainder / 10);
+            let o = remainder % 10;
+
+            if (t === 1) {
+                chunkWords += teens[o] + ' ';
+            } else {
+                // Gestion du "et" : vingt-et-un, trente-et-un…
+                if (o === 1 && (t === 2 || t === 3 || t === 4 || t === 5 || t === 6)) {
+                    chunkWords += tens[t] + ' et un ';
+                } else if (t === 7 || t === 9) {
+                    // cas spéciaux : 71, 91 …
+                    chunkWords += tens[t] + ' ' + teens[o] + ' ';
+                } else {
+                    if (t > 0) chunkWords += tens[t] + ' ';
+                    if (o > 0) chunkWords += ones[o] + ' ';
+                }
+            }
+
+            // ---- Mille, million, etc. ----
+            if (scaleIndex > 0) {
+                chunkWords += scale[scaleIndex] + ' ';
+            }
+
+            result = chunkWords + result;
+        }
+
+        num = Math.floor(num / 1000);
+        scaleIndex++;
+    }
+
+    return result.trim();
+}
+
+
 
 function showError(message) {
     document.getElementById("popupContent").innerHTML = `
