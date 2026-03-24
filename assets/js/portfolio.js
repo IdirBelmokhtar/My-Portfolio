@@ -40,12 +40,12 @@ const filterFunc = function (selectedValue) {
       continue;
     }
 
-    // Popular logic
+    // Category logic
     if (
       cleanValue === cat ||
-      (cleanValue === "popular" && cat.startsWith("popular")) ||
-      (cleanValue === "mobile" && cat === "popularmobile") ||
-      (cleanValue === "web" && cat === "popularweb")
+      (cleanValue === "popular" && cat.includes("popular")) ||
+      (cleanValue === "mobile" && cat.includes("mobile")) ||
+      (cleanValue === "web" && cat.includes("web"))
     ) {
       filterItems[i].classList.add("active");
     } else {
